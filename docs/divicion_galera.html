@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>PyScript Hello World</title>
+
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <link rel="stylesheet" href="./assets/css/examples.css" />
+    <link rel="stylesheet" href="./assets/prism/prism.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    <script defer src="./assets/prism/prism.js"></script>
+  </head>
+
+
+  <body>
+    <section class="pyscript">
+      División en Galeras <br>
+      This is the current date and time, as computed by Python:
+      <py-script>
+	x = ""
+	y = ""
+	
+	
+	while type(x) != type(1):
+	    x = int(input("x = "))
+	while type(y) != type(1):
+	    y = int(input("y = "))
+	
+	
+	def tamano(x,y=0,modo=0):
+	    i = 0
+	    o = 0
+	    while x > 0:
+	        x=int(x/10)
+	        i+=1
+	        if i == y:
+	            o=x
+	            break
+	        
+	    if   modo == 0:
+	        return i
+	    elif modo == 1:
+	        return o
+	    
+	def arreglo_a_numero(arr):
+	    """
+	    Convierte un arreglo de números en su correspondiente número entero.
+	    """
+	    # Convertimos cada número a string y los concatenamos
+	    num_str = ''.join(map(str, arr))
+	    
+	    # Convertimos el string resultante a número entero
+	    num = int(num_str)
+	    
+	    return num
+	
+	def agregar(x,y,p=1):
+	    x = x*10**p+y
+	    return x
+	
+	def obtener_numero_en_posicion(num, posicion, fin=None):
+	    numeros = [int(d) for d in str(num)]
+	    if fin is not None:
+	        return numeros[posicion-1:fin]
+	    else:
+	        return numeros[posicion-1]
+	
+	r = int(x)/int(y)
+	i = 1
+	espacio = 0
+	objetivo = obtener_numero_en_posicion(x,i)
+	respuesta = []
+	
+	print("\n{0} |{1}".format(x,y))
+	while i <= tamano(x):
+	    while objetivo < y:
+	        if i == tamano(x):
+	                break
+	        i+=1
+	        objetivo = agregar(objetivo, obtener_numero_en_posicion(x,i))
+	    res = int(objetivo/y)
+	    respuesta.append(res)
+	    multiplo = int(res*int(y))
+	    for o in range(0,espacio):
+	        print(" ",end="")
+	    print("{0}".format(multiplo))
+	    resto = objetivo - multiplo
+	    espacio+=1
+	    if i != tamano(x):
+	        i+=1
+	        resto = agregar(resto, obtener_numero_en_posicion(x,i))
+	        while resto < y:
+	            if i == tamano(x):
+	                break
+	            i+=1
+	            resto = agregar(resto, obtener_numero_en_posicion(x,i))
+	            respuesta.append(0)
+	    else:
+	        for o in range(0,espacio-1):
+	            print(" ",end="")
+	        print("--")
+	        for o in range(0,espacio):
+	            print(" ",end="")
+	        print("{0}".format(resto))
+	        break
+	    for o in range(0,espacio-1):
+	            print(" ",end="")
+	    print("--")
+	    for o in range(0,espacio):
+	        print(" ",end="")
+	    print("{0}".format(resto))
+	    objetivo = resto
+	    
+	print("\n{0} / {1} = {2}".format(x,y,arreglo_a_numero(respuesta)))
+      </py-script>
+    </section>
+  </body>
+
+</html>
