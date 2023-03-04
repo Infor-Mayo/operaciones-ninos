@@ -17,94 +17,92 @@
       División en Galeras <br>
       This is the current date and time, as computed by Python:
       <py-script>
-	x = ""
-	y = ""
-	
-	
-	while type(x) != type(1):
-	    x = int(input())
-	print("x -> {0}".format(x))
-	while type(y) != type(1):
-	    y = int(input("y = "))
-	print("y -> {0}".format(y))
-	
-  def tamano(x,y=0,modo=0):
-      i = 0
-      o = 0
-      while x > 0:
-          x=int(x/10)
-          i+=1
-          if i == y:
-              o=x
-             break
-        
-     if   modo == 0:
-         return i
-     elif modo == 1:
-         return o
-    
-  def arreglo_a_numero(arr):
-     """
-     Convierte un arreglo de números en su correspondiente número entero.
-     """
-     # Convertimos cada número a string y los concatenamos
-     num_str = ''.join(map(str, arr))
-    
-      # Convertimos el string resultante a número entero
-     num = int(num_str)
-    
-      return num
+x = ""
+y = ""
 
-  def agregar(x,y,p=1):
+while type(x) != type(1):
+    x = int(input("x = "))
+while type(y) != type(1):
+    y = int(input("y = "))
+
+
+def tamano(x,y=0,modo=0):
+    i = 0
+    o = 0
+    while x > 0:
+        x=int(x/10)
+        i+=1
+        if i == y:
+            o=x
+            break
+        
+    if   modo == 0:
+        return i
+    elif modo == 1:
+        return o
+    
+def arreglo_a_numero(arr):
+    """
+    Convierte un arreglo de números en su correspondiente número entero.
+    """
+    # Convertimos cada número a string y los concatenamos
+    num_str = ''.join(map(str, arr))
+    
+    # Convertimos el string resultante a número entero
+    num = int(num_str)
+    
+    return num
+
+def agregar(x,y,p=1):
     x = x*10**p+y
     return x
 
-  def obtener_numero_en_posicion(num, posicion, fin=None):
+def obtener_numero_en_posicion(num, posicion, fin=None):
     numeros = [int(d) for d in str(num)]
     if fin is not None:
         return numeros[posicion-1:fin]
     else:
         return numeros[posicion-1]
 
-  r = int(x)*int(y)
-  i = 1
-  espacio = 1
-  objetivo = obtener_numero_en_posicion(x,i)
-  respuesta = []
-  operacion = []
-  print("{0}*{1}".format(x,y))
-  for n in range(0,tamano(x)+tamano(y)+1):
+r = int(x)*int(y)
+i = 1
+espacio = 1
+objetivo = obtener_numero_en_posicion(x,i)
+respuesta = []
+operacion = []
+print("{0}*{1}".format(x,y))
+for n in range(0,tamano(x)+tamano(y)+1):
      print("-",end="")
-  print("\n",end="")
-  for o in range(0,tamano(y)):
+print("\n",end="")
+for o in range(0,tamano(y)):
     p = obtener_numero_en_posicion(y, o+1)
     for o in range(0,espacio):
         print(" ",end="")
     operacion.append(int(x*p))
     print("{0}".format(int(x*p)))
     espacio+=1
-  gia=0
-  operacion = list(reversed(operacion))
-  for i in range(0,len(operacion)):
+gia=0
+operacion = list(reversed(operacion))
+for i in range(0,len(operacion)):
     operacion[i]=operacion[i]*(10**gia)
     gia+=1
        
-  operacion = list(reversed(operacion))
+operacion = list(reversed(operacion))
 
-  respuesta=0
-  for i in range(0,len(operacion)):
+respuesta=0
+for i in range(0,len(operacion)):
     respuesta+=operacion[i]
 
-  espacio=1
-  for o in range(0,espacio):
+espacio=1
+for o in range(0,espacio):
     print(" ",end="")     
-  for n in range(0,tamano(x)+tamano(y)-1):
+for n in range(0,tamano(x)+tamano(y)-1):
      print("-",end="")
-  print("\n",end="")
-  espacio=1
-  for o in range(0,espacio):
+print("\n",end="")
+espacio=1
+for o in range(0,espacio):
         print(" ",end="")     
-  print(respuesta)  
+print(respuesta)  
 
       </py-script>
     </section>
