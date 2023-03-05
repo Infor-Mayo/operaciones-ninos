@@ -1,0 +1,123 @@
+<html>
+  <head>
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: Arial, sans-serif;
+      }
+      
+      h1 {
+        font-size: 2em;
+        margin-bottom: 20px;
+      }
+      
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #f2f2f2;
+        padding: 20px;
+        border-radius: 10px;
+      }
+      
+      label {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+      }
+      
+      input[type="text"] {
+        font-size: 1.2em;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+      
+      input[type="submit"] {
+        font-size: 1.2em;
+        padding: 10px 20px;
+        background-color: lightblue;
+        border-radius: 5px;
+        border: 1px solid blue;
+        color: white;
+        cursor: pointer;
+      }
+      
+      .result {
+        font-size: 1.2em;
+        margin-top: 20px;
+      }
+      
+      .iterations {
+        margin-top: 20px;
+        font-size: 1.2em;
+      }
+    </style>
+
+    <title>Descomposición en factores primos</title>
+    
+  </head>
+  <body>
+    <h1>Descomposición en factores primos</h1>
+    <p>
+      Ingrese un número:
+      <input type="text" id="inputNumber">
+    </p>
+    <button onclick="decomposeNumber()">Descomponer</button>
+    <br><br>
+    <div id="result"></div>
+    <p id="finalResult"></p>
+
+    <script>
+    
+      const primos = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97];
+      let x_ini;
+      let respuesta = [];
+      let res = {};
+
+      function agregarNumero(number) {
+        if (number in res) {
+          res[number] += 1;
+        } else {
+          res[number] = 1;
+        }
+      }
+
+      function printDict(dictionary) {
+        let result = "";
+        let items = Object.entries(dictionary);
+        for (let i = 0; i < items.length; i++) {
+          result += items[i][0] + "^" + items[i][1];
+          if (i < items.length - 1) {
+            result += "*";
+          }
+        }
+        return result;
+      }
+
+      function decomposeNumber() {
+        let input = document.getElementById("inputNumber").value;
+        x_ini = input;
+        let output = "";
+        while (input != 1) {
+          for (let i = 0; i < primos.length; i++) {
+            if (input % primos[i] == 0) {
+              output += input + " | " + primos[i] + "<br>";
+              input = input / primos[i];
+              agregarNumero(primos[i]);
+              respuesta.push(primos[i]);
+              break;
+            }
+          }
+        }
+        output += "1";
+        document.getElementById("result").innerHTML = output;
+        document.getElementById("finalResult").innerHTML = "El resultado es: mcm(" + x_ini + ") = " + printDict(res);
+        res = {};
+      }
+    </script>
+  </body>
+</html>
+
